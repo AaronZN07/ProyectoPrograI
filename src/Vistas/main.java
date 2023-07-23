@@ -1,11 +1,14 @@
-package main;
+package Vistas;
 
 /**
  *
  * @author aaron
  */
+
 public class main {
     public static void main(String[] args) {
-        System.out.println("Hola Mundo");
+        frmLogin login = new frmLogin();
+        
+        login.setVisible(true);
     }
 }
