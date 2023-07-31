@@ -16,6 +16,7 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        dkpContenedor = new javax.swing.JDesktopPane();
         mnbBarraMenu = new javax.swing.JMenuBar();
         mnuInventario = new javax.swing.JMenu();
         mniIngreso = new javax.swing.JMenuItem();
@@ -34,6 +35,17 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
         mniSalir = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        javax.swing.GroupLayout dkpContenedorLayout = new javax.swing.GroupLayout(dkpContenedor);
+        dkpContenedor.setLayout(dkpContenedorLayout);
+        dkpContenedorLayout.setHorizontalGroup(
+            dkpContenedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 400, Short.MAX_VALUE)
+        );
+        dkpContenedorLayout.setVerticalGroup(
+            dkpContenedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 277, Short.MAX_VALUE)
+        );
 
         mnuInventario.setText("Inventario");
 
@@ -91,11 +103,11 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addComponent(dkpContenedor)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 277, Short.MAX_VALUE)
+            .addComponent(dkpContenedor)
         );
 
         pack();
@@ -139,6 +151,7 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JDesktopPane dkpContenedor;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuBar mnbBarraMenu;
