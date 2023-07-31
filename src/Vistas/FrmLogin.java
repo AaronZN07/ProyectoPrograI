@@ -1,30 +1,35 @@
 package Vistas;
 
-import Entidades.Usuario;
+import Modelo.Usuario;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 /**
  *
  * @author aaron
  */
-public class frmLogin extends javax.swing.JFrame {
+public class FrmLogin extends javax.swing.JFrame {
 
-    public frmLogin() {
+    public FrmLogin() {
         initComponents();
     }
 
     private void iniciarSesion(){
-        frmMenuPrincipal frmMenu;
+        FrmMenuPrincipal frmMenu;
         Usuario usuario = new Usuario();
         
         String usuarioIngresado = txtUsuario.getText();
         String contrasenaIngresada = String.valueOf(pwdContrasena.getPassword());
         
-        boolean auth = usuario.iniciarSesion(usuarioIngresado, contrasenaIngresada);
+        boolean auth = usuario.iniciarSesion(usuarioIngresado.trim(), contrasenaIngresada.trim());
         
         if(auth){
-            frmMenu = new frmMenuPrincipal(usuario);
+            Main.usuario = usuario;
+            
+            frmMenu = new FrmMenuPrincipal();
+            frmMenu.setExtendedState(JFrame.MAXIMIZED_BOTH);
             frmMenu.setVisible(true);
+            
             this.setVisible(false);
         }else{
             JOptionPane.showMessageDialog(null, "Credenciales incorrectas");
@@ -152,20 +157,21 @@ public class frmLogin extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(frmLogin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrmLogin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(frmLogin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrmLogin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(frmLogin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrmLogin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(frmLogin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrmLogin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new frmLogin().setVisible(true);
+                new FrmLogin().setVisible(true);
             }
         });
     }

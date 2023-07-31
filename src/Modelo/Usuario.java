@@ -1,7 +1,6 @@
-package Entidades;
+package Modelo;
 
 import java.sql.*;
-import Entidades.Conexion;
 
 /**
  *
@@ -47,11 +46,9 @@ public class Usuario {
         }
     }
     
-    
     public String getUsuario() {
         return usuario;
     }
-
 
     public String getNombre() {
         return nombre + " " + apellidos;
