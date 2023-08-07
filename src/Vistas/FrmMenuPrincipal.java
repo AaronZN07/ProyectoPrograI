@@ -35,6 +35,7 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
         mniSalir = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("SIstema Control de Inventario");
 
         javax.swing.GroupLayout dkpContenedorLayout = new javax.swing.GroupLayout(dkpContenedor);
         dkpContenedor.setLayout(dkpContenedorLayout);
@@ -49,7 +50,7 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
 
         mnuInventario.setText("Inventario");
 
-        mniIngreso.setText("Entrada de Inventario");
+        mniIngreso.setText("Ingreso de Inventario");
         mnuInventario.add(mniIngreso);
 
         mniSalida.setText("Salida de Inventario");
@@ -90,9 +91,19 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
         mnuSistema.setText("Sistema");
 
         mniCerrarSesion.setText("Cerra sesión");
+        mniCerrarSesion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mniCerrarSesionActionPerformed(evt);
+            }
+        });
         mnuSistema.add(mniCerrarSesion);
 
         mniSalir.setText("Salir");
+        mniSalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mniSalirActionPerformed(evt);
+            }
+        });
         mnuSistema.add(mniSalir);
 
         mnbBarraMenu.add(mnuSistema);
@@ -113,6 +124,18 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void mniSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniSalirActionPerformed
+        System.exit(0);
+    }//GEN-LAST:event_mniSalirActionPerformed
+
+    private void mniCerrarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniCerrarSesionActionPerformed
+        Main.usuario.cerrarSesion();
+        this.setVisible(false);
+        
+        FrmLogin frmLogin = new FrmLogin();
+        frmLogin.setVisible(true);
+    }//GEN-LAST:event_mniCerrarSesionActionPerformed
 
     /**
      * @param args the command line arguments

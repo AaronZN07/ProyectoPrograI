@@ -48,6 +48,7 @@ public class FrmLogin extends javax.swing.JFrame {
         btnSalir = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Iniciar Sesión");
 
         btnIniciarSesion.setText("Iniciar Sesión");
         btnIniciarSesion.addActionListener(new java.awt.event.ActionListener() {

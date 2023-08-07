@@ -46,6 +46,13 @@ public class Usuario {
         }
     }
     
+    public void cerrarSesion(){
+        this.usuario = null;
+        this.nombre = null;
+        this.apellidos = null;
+        this.idRol = 0;
+    }
+    
     public String getUsuario() {
         return usuario;
     }
