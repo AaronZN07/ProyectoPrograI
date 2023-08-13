@@ -1,6 +1,14 @@
 package Vistas;
 
-import Modelo.Usuario;
+import Vistas.Configuracion.IfrmCategorias;
+import Vistas.Configuracion.IfrmUsuarios;
+import Vistas.Gestion.IfrmAlmacenes;
+import Vistas.Gestion.IfrmProductos;
+import Vistas.Inventario.IfrmIngresos;
+import Vistas.Inventario.IfrmMovimientos;
+import Vistas.Inventario.IfrmSalidas;
+import java.awt.Image;
+import javax.swing.ImageIcon;
 
 /**
  *
@@ -10,6 +18,14 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
     
     public FrmMenuPrincipal() {
         initComponents();
+        
+        Image icono = new ImageIcon(this.getClass().getResource("/Icono/inventario.png")).getImage();
+        this.setIconImage(icono);
+        
+        if(Main.usuario.getIdRol() == 2){
+            mniAlmacenes.setVisible(false);
+            mniUsuarios.setVisible(false);
+        }
     }
 
     @SuppressWarnings("unchecked")
@@ -24,10 +40,10 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
         mniMovimientos = new javax.swing.JMenuItem();
         mnuGestion = new javax.swing.JMenu();
         mniAlmacenes = new javax.swing.JMenuItem();
-        mniArticulos = new javax.swing.JMenuItem();
+        mniProductos = new javax.swing.JMenuItem();
         mnuConfig = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
-        jMenuItem2 = new javax.swing.JMenuItem();
+        mniCategorias = new javax.swing.JMenuItem();
+        mniUsuarios = new javax.swing.JMenuItem();
         mnuAyuda = new javax.swing.JMenu();
         mniManual = new javax.swing.JMenuItem();
         mnuSistema = new javax.swing.JMenu();
@@ -35,7 +51,7 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
         mniSalir = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("SIstema Control de Inventario");
+        setTitle("Sistema Control de Inventario");
 
         javax.swing.GroupLayout dkpContenedorLayout = new javax.swing.GroupLayout(dkpContenedor);
         dkpContenedor.setLayout(dkpContenedorLayout);
@@ -51,12 +67,27 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
         mnuInventario.setText("Inventario");
 
         mniIngreso.setText("Ingreso de Inventario");
+        mniIngreso.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mniIngresoActionPerformed(evt);
+            }
+        });
         mnuInventario.add(mniIngreso);
 
         mniSalida.setText("Salida de Inventario");
+        mniSalida.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mniSalidaActionPerformed(evt);
+            }
+        });
         mnuInventario.add(mniSalida);
 
         mniMovimientos.setText("Movimientos de Inventario");
+        mniMovimientos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mniMovimientosActionPerformed(evt);
+            }
+        });
         mnuInventario.add(mniMovimientos);
 
         mnbBarraMenu.add(mnuInventario);
@@ -64,26 +95,51 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
         mnuGestion.setText("Gestión Almacenes");
 
         mniAlmacenes.setText("Almacenes");
+        mniAlmacenes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mniAlmacenesActionPerformed(evt);
+            }
+        });
         mnuGestion.add(mniAlmacenes);
 
-        mniArticulos.setText("Articulos");
-        mnuGestion.add(mniArticulos);
+        mniProductos.setText("Productos");
+        mniProductos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mniProductosActionPerformed(evt);
+            }
+        });
+        mnuGestion.add(mniProductos);
 
         mnbBarraMenu.add(mnuGestion);
 
         mnuConfig.setText("Configuracion");
 
-        jMenuItem1.setText("Categorias");
-        mnuConfig.add(jMenuItem1);
+        mniCategorias.setText("Categorias");
+        mniCategorias.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mniCategoriasActionPerformed(evt);
+            }
+        });
+        mnuConfig.add(mniCategorias);
 
-        jMenuItem2.setText("Usuarios");
-        mnuConfig.add(jMenuItem2);
+        mniUsuarios.setText("Usuarios");
+        mniUsuarios.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mniUsuariosActionPerformed(evt);
+            }
+        });
+        mnuConfig.add(mniUsuarios);
 
         mnbBarraMenu.add(mnuConfig);
 
         mnuAyuda.setText("Ayuda");
 
         mniManual.setText("Manual de Usuario");
+        mniManual.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mniManualActionPerformed(evt);
+            }
+        });
         mnuAyuda.add(mniManual);
 
         mnbBarraMenu.add(mnuAyuda);
@@ -130,12 +186,68 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_mniSalirActionPerformed
 
     private void mniCerrarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniCerrarSesionActionPerformed
-        Main.usuario.cerrarSesion();
+        Main.usuario = null;
         this.setVisible(false);
         
         FrmLogin frmLogin = new FrmLogin();
         frmLogin.setVisible(true);
     }//GEN-LAST:event_mniCerrarSesionActionPerformed
+
+    private void mniUsuariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniUsuariosActionPerformed
+        IfrmUsuarios frame = new IfrmUsuarios();
+        
+        dkpContenedor.add(frame);
+        frame.setVisible(true);
+    }//GEN-LAST:event_mniUsuariosActionPerformed
+
+    private void mniCategoriasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniCategoriasActionPerformed
+        IfrmCategorias frame = new IfrmCategorias();
+        
+        dkpContenedor.add(frame);
+        frame.setVisible(true);
+    }//GEN-LAST:event_mniCategoriasActionPerformed
+
+    private void mniAlmacenesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniAlmacenesActionPerformed
+        IfrmAlmacenes frame = new IfrmAlmacenes();
+        
+        dkpContenedor.add(frame);
+        frame.setVisible(true);
+    }//GEN-LAST:event_mniAlmacenesActionPerformed
+
+    private void mniProductosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniProductosActionPerformed
+        IfrmProductos frame = new IfrmProductos();
+        
+        dkpContenedor.add(frame);
+        frame.setVisible(true);
+    }//GEN-LAST:event_mniProductosActionPerformed
+
+    private void mniIngresoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniIngresoActionPerformed
+        IfrmIngresos frame = new IfrmIngresos();
+        
+        dkpContenedor.add(frame);
+        frame.setVisible(true);
+    }//GEN-LAST:event_mniIngresoActionPerformed
+
+    private void mniSalidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniSalidaActionPerformed
+        IfrmSalidas frame = new IfrmSalidas();
+        
+        dkpContenedor.add(frame);
+        frame.setVisible(true);
+    }//GEN-LAST:event_mniSalidaActionPerformed
+
+    private void mniMovimientosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniMovimientosActionPerformed
+        IfrmMovimientos frame = new IfrmMovimientos();
+        
+        dkpContenedor.add(frame);
+        frame.setVisible(true);
+    }//GEN-LAST:event_mniMovimientosActionPerformed
+
+    private void mniManualActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniManualActionPerformed
+        IfrmAyuda frame = new IfrmAyuda();
+        
+        dkpContenedor.add(frame);
+        frame.setVisible(true);
+    }//GEN-LAST:event_mniManualActionPerformed
 
     /**
      * @param args the command line arguments
@@ -175,17 +287,17 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JDesktopPane dkpContenedor;
-    private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuBar mnbBarraMenu;
     private javax.swing.JMenuItem mniAlmacenes;
-    private javax.swing.JMenuItem mniArticulos;
+    private javax.swing.JMenuItem mniCategorias;
     private javax.swing.JMenuItem mniCerrarSesion;
     private javax.swing.JMenuItem mniIngreso;
     private javax.swing.JMenuItem mniManual;
     private javax.swing.JMenuItem mniMovimientos;
+    private javax.swing.JMenuItem mniProductos;
     private javax.swing.JMenuItem mniSalida;
     private javax.swing.JMenuItem mniSalir;
+    private javax.swing.JMenuItem mniUsuarios;
     private javax.swing.JMenu mnuAyuda;
     private javax.swing.JMenu mnuConfig;
     private javax.swing.JMenu mnuGestion;
