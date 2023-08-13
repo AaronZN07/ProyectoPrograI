@@ -1,6 +1,7 @@
 package Modelo;
 
 import java.sql.*;
+import Vistas.Main;
 
 /**
  *
@@ -11,58 +12,75 @@ public class Usuario {
     private String usuario;
     private String nombre;
     private String apellidos;
+    private String contrasegna;
     private int idRol;
-    
-    public boolean iniciarSesion(String usuario, String password){
-        Conexion connect = new Conexion();
-        Connection conn = connect.conectar();
-        
-        PreparedStatement ps;
-        ResultSet rs;
-        
-        try{
-            ps = conn.prepareStatement("SELECT nombre, apellidos, id_rol FROM usuarios "
-                    + "WHERE usuario = ? AND contrasegna = ?");
-            ps.setString(1, usuario);
-            ps.setString(2, password);
-            
-            rs = ps.executeQuery();
-            
-            if(!rs.next()){
-                return false;
-            }
-            
-            this.usuario = usuario;
-            this.nombre = rs.getString("nombre");
-            this.apellidos = rs.getString("apellidos");
-            this.idRol = rs.getInt("id_rol");
-            
-            return true;
-        }catch(SQLException ex){
-            System.out.println(ex);
-            return false;
-        }finally{
-            connect.desconectar();
-        }
+    private boolean estado;
+
+    public Usuario(String usuario, String nombre, String apellidos, String contrasegna, int idRol) {
+        this.usuario = usuario;
+        this.nombre = nombre;
+        this.apellidos = apellidos;
+        this.contrasegna = contrasegna;
+        this.idRol = idRol;
+        this.estado = true;
     }
     
-    public void cerrarSesion(){
-        this.usuario = null;
-        this.nombre = null;
-        this.apellidos = null;
-        this.idRol = 0;
+    public Usuario(){
     }
     
+    // <editor-fold defaultstate="collapsed" desc="Getters and setters">
+
+    public String getNombreCompleto() {
+        return nombre + " " + apellidos;
+    }
+
     public String getUsuario() {
         return usuario;
     }
 
+    public void setUsuario(String usuario) {
+        this.usuario = usuario;
+    }
+
     public String getNombre() {
-        return nombre + " " + apellidos;
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public String getApellidos() {
+        return apellidos;
+    }
+
+    public void setApellidos(String apellidos) {
+        this.apellidos = apellidos;
+    }
+
+    public String getContrasegna() {
+        return contrasegna;
+    }
+
+    public void setContrasegna(String contrasegna) {
+        this.contrasegna = contrasegna;
     }
 
     public int getIdRol() {
         return idRol;
     }
 
+    public void setIdRol(int idRol) {
+        this.idRol = idRol;
+    }
+    
+    public boolean isEstado() {
+        return estado;
+    }
+
+    public void setEstado(boolean estado) {
+        this.estado = estado;
+    }
+    
+    //</editor-fold>
 }

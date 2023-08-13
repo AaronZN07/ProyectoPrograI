@@ -1,6 +1,8 @@
 package Vistas;
 
 import Modelo.Usuario;
+import java.awt.Image;
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
@@ -12,16 +14,29 @@ public class FrmLogin extends javax.swing.JFrame {
 
     public FrmLogin() {
         initComponents();
+        
+        Image icono = new ImageIcon(this.getClass().getResource("/Icono/inventario.png")).getImage();
+        this.setIconImage(icono);
     }
 
     private void iniciarSesion(){
         FrmMenuPrincipal frmMenu;
-        Usuario usuario = new Usuario();
+        boolean auth = false;
+        Usuario usuario = null;
         
         String usuarioIngresado = txtUsuario.getText();
         String contrasenaIngresada = String.valueOf(pwdContrasena.getPassword());
         
-        boolean auth = usuario.iniciarSesion(usuarioIngresado.trim(), contrasenaIngresada.trim());
+        for(int i = 0; i < Main.listaUsuarios.size(); i++){
+            if(Main.listaUsuarios.get(i).getUsuario().equals(usuarioIngresado)){
+                if(Main.listaUsuarios.get(i).isEstado()){
+                    if(Main.listaUsuarios.get(i).getContrasegna().equals(contrasenaIngresada)){
+                        auth = true;
+                        usuario = Main.listaUsuarios.get(i);
+                    }
+                }
+            }
+        }
         
         if(auth){
             Main.usuario = usuario;
